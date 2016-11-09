@@ -29,7 +29,7 @@ Najtrudniejszym elementem tej części było przypisanie znalezionych konturów 
 
 Do wykonania zadania wykorzystane zostały następujące filtry:
 \begin{description}
-\item[sobel_h oraz sobel_v] znajdują odpowiednio poziome i pionowe krawędzie na zdjęciu;
+\item[sobel\_ h oraz sobel\_ v] znajdują odpowiednio poziome i pionowe krawędzie na zdjęciu;
 na wejściu otrzymują zdjęcie w odcieniach szarości (macierz 2D), na wyjściu dają macierz 2D zawierającą mapę krawędzi.
 \item[gaussian] przeprowadza rozmycie Gaussa;
 na wejściu otrzymuje zdjęcie w odcieniach szarości (macierz 2D) i odchylenie standardowe, na wyjściu daje macierz 2D – przefiltrowane zdjęcie.
@@ -40,7 +40,7 @@ oraz funkcje:
 \begin{description}
 \item[label] – separuje cechy na zdjęciu;
 na wejściu otrzymuje macierz 2D gdzie jako 0 oznaczone jest tło, na wyjściu daje macierz 2D gdzie każda cecha jest oznaczona inną liczbą.
-\item[find_boundaries] – znajduje granice pomiędzy cechami;
+\item[find\_ boundaries] – znajduje granice pomiędzy cechami;
 na wejściu otrzymuje macierz 2D z odseparowanymi cechami (każda oznaczona inną liczbą), na wyjściu zwraca macierz 2D z oznaczonymi granicami.
 \end{description}
  
