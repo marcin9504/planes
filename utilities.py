@@ -35,12 +35,12 @@ def custom_sobel(image):
 
 def edgy_color(image_name):
     image = imread(image_name, as_grey=False)
-    original = imread(image_name, as_grey=False)
+    # print(original)
 
     image = rgb2hsv(image)
     image = image[..., 2]
 
-    objects, objects_count = ndimage.label(image < .5)
+    objects, objects_count = ndimage.label(image < .5)  # ♪ really don’t care
 
     sizes = ndimage.sum(image, objects, range(objects_count + 1))
     mask_size = sizes < 35
@@ -49,24 +49,28 @@ def edgy_color(image_name):
     labels = np.unique(objects)
     objects = np.searchsorted(labels, objects)
 
-    contours = find_boundaries(objects)
+    contours = find_boundaries(objects)  # ♪ really don’t care
     objects[contours == 0] = 0
     objects = dilation(objects)
     objects = dilation(objects)
-    objects = dilation(objects)
-
-    colours = []
-    for _ in range(objects_count + 1):
-        colours.append([random.randint(256) for _ in range(3)])
-
-    result = [[org if obj == 0 else colours[obj] for org, obj in zip(row_org, row_obj)]
-              for row_org, row_obj in zip(original, objects)]
-    # fixme combining the 2 images (original & objects)
+    # objects = dilation(objects)
 
     centroids = find_centroids(objects)
     # todo if the function is correct, draw white circles centered in the centroids
 
-    return result  # to see the contours alone, return objects
+    colours = []
+    for _ in range(objects_count + 1):
+        colours.append([random.randint(256) / 255 for _ in range(3)] + [1])
+    colours[0][3] = 0
+
+    mask = np.zeros_like(objects, dtype=np.float64)
+    x, y = objects.shape
+    mask.resize(x, y, 4)
+    for r, row in enumerate(objects):
+        for c, element in enumerate(row):
+            mask[r, c] = colours[element]
+
+    return mask
 
 
 def find_centroids(labels):
