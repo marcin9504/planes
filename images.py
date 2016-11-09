@@ -4,8 +4,9 @@ from utilities import edgy, edgy_color
 
 images = ["./img/samolot" + str(i // 10) + str(i % 10) + ".jpg" for i in range(0, 21)]
 
-basic_images = ["./img/samolot" + str(i // 10) + str(i % 10) + ".jpg" for i in (0,1,3,4,5,7)]
-advanced_images = ["./img/samolot" + str(i // 10) + str(i % 10) + ".jpg" for i in (0,1,2,3,5,7,8,9,10,11,12,13,14,15,16,17,18,19)]
+basic_images = ["./img/samolot" + str(i // 10) + str(i % 10) + ".jpg" for i in (0, 1, 3, 4, 5, 7)]
+advanced_images = ["./img/samolot" + str(i // 10) + str(i % 10) + ".jpg" for i in (0, 1, 2, 3, 5, 7, 8, 9, 10, 11, 12,
+                                                                                   13, 14, 15, 16, 17, 18, 19)]
 
 fig = plt.figure(figsize=(60, 40))
 fig.set_facecolor('black')

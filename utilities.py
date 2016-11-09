@@ -36,12 +36,11 @@ def custom_sobel(image):
 
 def edgy_color(image_name):
     image = imread(image_name, as_grey=False)
-    # print(original)
 
     image = rgb2hsv(image)
     image = image[..., 2]
 
-    objects, objects_count = ndimage.label(image < .5)  # ♪ really don’t care
+    objects, objects_count = ndimage.label(image < .5)
 
     sizes = ndimage.sum(image, objects, range(objects_count + 1))
     mask_size = sizes < 35
@@ -50,7 +49,7 @@ def edgy_color(image_name):
     labels = np.unique(objects)
     objects = np.searchsorted(labels, objects)
 
-    contours = find_boundaries(objects)  # ♪ really don’t care
+    contours = find_boundaries(objects)
     objects[contours == 0] = 0
     objects = dilation(objects)
     objects = dilation(objects)
@@ -69,11 +68,8 @@ def edgy_color(image_name):
 
     centroids = find_centroids(objects)
     for c in centroids:
-        # if c is inside image:
         rr, cc = circle(c[0], c[1], int(x / 100))
-        # print(c)
         mask[rr, cc] = 1
-    # todo if the function is correct, draw white circles centered in the centroids
 
     return mask
 
@@ -84,8 +80,6 @@ def find_centroids(labels):
         for j, element in enumerate(row):
             if element not in centroids_all:
                 centroids_all[element] = {'x': 0, 'y': 0, 'n': 0}
-            # if element == 4:
-            #     print(i, j, centroids_all[element]['n'] + 1)
             centroids_all[element]['x'] += i
             centroids_all[element]['y'] += j
             centroids_all[element]['n'] += 1
