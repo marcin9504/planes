@@ -9,6 +9,7 @@ from skimage.segmentation import find_boundaries
 from skimage.morphology import dilation
 from skimage.draw import circle
 
+
 def discretize(image):
     threshold = 20
     black = image < threshold
@@ -53,7 +54,6 @@ def edgy_color(image_name):
     objects[contours == 0] = 0
     objects = dilation(objects)
     objects = dilation(objects)
-    # objects = dilation(objects)
 
     colours = []
     for _ in range(objects_count + 1):
@@ -68,10 +68,11 @@ def edgy_color(image_name):
             mask[r, c] = colours[element]
 
     centroids = find_centroids(objects)
-    # for c in centroids:
+    for c in centroids:
         # if c is inside image:
-            # rr, cc = circle(c[0], c[1], 5)
-            # mask[rr, cc] = 1
+        rr, cc = circle(c[0], c[1], int(x / 100))
+        # print(c)
+        mask[rr, cc] = 1
     # todo if the function is correct, draw white circles centered in the centroids
 
     return mask
@@ -79,14 +80,18 @@ def edgy_color(image_name):
 
 def find_centroids(labels):
     centroids_all = {}
-    for i, row in enumerate(labels.tolist()):
+    for i, row in enumerate(labels):
         for j, element in enumerate(row):
             if element not in centroids_all:
-                centroids_all[element] = {'x': [], 'y': []}
-            centroids_all[element]['x'].append(j)
-            centroids_all[element]['y'].append(i)
+                centroids_all[element] = {'x': 0, 'y': 0, 'n': 0}
+            # if element == 4:
+            #     print(i, j, centroids_all[element]['n'] + 1)
+            centroids_all[element]['x'] += i
+            centroids_all[element]['y'] += j
+            centroids_all[element]['n'] += 1
+
     centroids = []
     for key, value in centroids_all.items():
-        centroids.append((statistics.mean(value['x']),
-                          statistics.mean(value['y'])))
+        if key != 0:
+            centroids.append((value['x'] / value['n'], value['y'] / value['n']))
     return centroids
