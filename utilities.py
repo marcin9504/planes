@@ -7,7 +7,7 @@ from scipy import ndimage, random
 from skimage.filters import gaussian, sobel_h, sobel_v
 from skimage.segmentation import find_boundaries
 from skimage.morphology import dilation
-
+from skimage.draw import circle
 
 def discretize(image):
     threshold = 20
@@ -55,9 +55,6 @@ def edgy_color(image_name):
     objects = dilation(objects)
     # objects = dilation(objects)
 
-    centroids = find_centroids(objects)
-    # todo if the function is correct, draw white circles centered in the centroids
-
     colours = []
     for _ in range(objects_count + 1):
         colours.append([random.randint(256) / 255 for _ in range(3)] + [1])
@@ -69,6 +66,13 @@ def edgy_color(image_name):
     for r, row in enumerate(objects):
         for c, element in enumerate(row):
             mask[r, c] = colours[element]
+
+    centroids = find_centroids(objects)
+    # for c in centroids:
+        # if c is inside image:
+            # rr, cc = circle(c[0], c[1], 5)
+            # mask[rr, cc] = 1
+    # todo if the function is correct, draw white circles centered in the centroids
 
     return mask
 
