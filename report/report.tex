@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[OT4]{fontenc}
+\usepackage{graphicx,color}
+\usepackage{url}
+\usepackage[pdftex,hyperfootnotes=false,pdfborder={0 0 0}]{hyperref}
+\usepackage{float}
+
+\begin{document}
+\input{_tytulowa}
+
+\section*{Udział autorów}
+\begin{itemize}
+\item Marcin Drzewiecki zaimportował obrazy, napisał podstawowy algorytm do wykrywania obiektów pierwszoplanowych oraz stworzył mozaikę przetworzonych obrazów.
+\item Adam Pioterek udoskonalił podstawowy algorytm wykrywania obiektów pierwszoplanowych, napisał algorytm oznaczający kolorowe kontury na zdjęciu oraz znajdujący centroidy znalezionych obiektów.
+\end{itemize}
+
+\section{Opis ćwiczenia}
+Pierwsza część naszego ćwiczenia polegała na zaimportowaniu zdjęć samolotów na tle nieba.
+Na ich podstawie należało wyodrębnić samoloty od tła oraz utworzyć mozaikę obrazów zawierającą kontury samolotów. 
+Obrazy powinny zawierać jedynie czarne piksele należące do konturów samolotów, natomiast pozostałe powinny pozostać białe.
+Największą trudność w tej części ćwiczenia sprawiło nam znalezienie odpowiedniej kombinacji filtrów do wyodrębnienia konturów.
+
+Druga część polegała na nałożeniu kolorowych konturów samolotów na oryginalne zdjęcia.
+Każdy kontur miał mieć różny kolor.
+Dodatkowo, na każdym z samolotów należało zaznaczyć centroid.
+Najtrudniejszym elementem tej części było przypisanie znalezionych konturów odpowiednim samolotom.
+ 
+\section{Wynik działania programu}
+
+\subsection{Kontury}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=1\textwidth]{../basic.pdf}
+\end{center}
+\caption{Mozaika z konturami samolotów}
+\label{fig: wykres1}
+\end{figure}
+
+\subsection{Kolorowe kontury i centroidy}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=1\textwidth]{../advanced.pdf}
+\end{center}
+\caption{Mozaika z kolorowymi konturami samolotów oraz centroidami}
+\label{fig: wykres2}
+\end{figure}
+
+\end{document}
