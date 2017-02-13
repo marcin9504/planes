@@ -1,5 +1,3 @@
-import statistics
-
 import numpy as np
 from skimage.color import rgb2hsv
 from imread import imread
